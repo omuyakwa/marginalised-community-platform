@@ -27,6 +27,11 @@ const userSchema = new mongoose.Schema({
     enum: ['en', 'so'],
     default: 'en',
   },
+  communitySegment: {
+    type: String,
+    enum: ['Youth', 'Women', 'PWDs', 'Not Specified'],
+    default: 'Not Specified',
+  },
   disabled: {
     type: Boolean,
     default: false,

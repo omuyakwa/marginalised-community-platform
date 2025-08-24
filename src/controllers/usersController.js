@@ -13,6 +13,7 @@ async function getUserProfile(req, res) {
     email: req.user.email,
     role: req.user.role,
     locale: req.user.locale,
+    communitySegment: req.user.communitySegment,
   };
   res.status(200).json(userProfile);
 }
@@ -20,7 +21,8 @@ async function getUserProfile(req, res) {
 const updateUserSchema = Joi.object({
   name: Joi.string().min(3).optional(),
   locale: Joi.string().valid('en', 'so').optional(),
-}).or('name', 'locale'); // At least one of the keys must be present
+  communitySegment: Joi.string().valid('Youth', 'Women', 'PWDs', 'Not Specified').optional(),
+}).or('name', 'locale', 'communitySegment'); // At least one of the keys must be present
 
 /**
  * Update the profile of the currently logged-in user.
@@ -34,12 +36,9 @@ async function updateUserProfile(req, res) {
 
     const user = await User.findById(req.user._id);
 
-    if (value.name) {
-      user.name = value.name;
-    }
-    if (value.locale) {
-      user.locale = value.locale;
-    }
+    if (value.name) user.name = value.name;
+    if (value.locale) user.locale = value.locale;
+    if (value.communitySegment) user.communitySegment = value.communitySegment;
 
     await user.save();
 
@@ -49,6 +48,7 @@ async function updateUserProfile(req, res) {
       email: user.email,
       role: user.role,
       locale: user.locale,
+      communitySegment: user.communitySegment,
     };
     res.status(200).json({ message: 'Profile updated successfully.', user: userProfile });
 

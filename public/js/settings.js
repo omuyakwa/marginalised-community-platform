@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const nameInput = document.getElementById('name');
   const emailInput = document.getElementById('email');
   const localeSelect = document.getElementById('locale');
+  const communitySegmentSelect = document.getElementById('community-segment');
   const messageArea = document.getElementById('message-area');
 
   const accessToken = localStorage.getItem('accessToken');
@@ -32,6 +33,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     nameInput.value = user.name;
     emailInput.value = user.email;
     localeSelect.value = user.locale;
+    communitySegmentSelect.value = user.communitySegment || 'Not Specified';
   } catch (error) {
     showMessage(error.message, 'error');
   }
@@ -42,6 +44,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const data = {
       name: nameInput.value,
       locale: localeSelect.value,
+      communitySegment: communitySegmentSelect.value,
     };
 
     try {

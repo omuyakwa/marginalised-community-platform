@@ -42,6 +42,12 @@ document.addEventListener('DOMContentLoaded', async () => {
         <p class="content-meta">By ${content.authorId.name} on ${new Date(content.createdAt).toLocaleDateString()}</p>
         <p>${content.summary}</p>
         ${attachmentsHtml}
+        <div class="social-share" style="margin-top: 2rem;">
+          <h4>Share this content</h4>
+          <button class="share-btn" data-platform="twitter">Share on X</button>
+          <button class="share-btn" data-platform="facebook">Share on Facebook</button>
+          <button class="share-btn" data-platform="whatsapp">Share on WhatsApp</button>
+        </div>
       </div>
     `;
   };
@@ -175,8 +181,41 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   });
 
+  contentArea.addEventListener('click', (e) => {
+    if (e.target.classList.contains('share-btn')) {
+      const platform = e.target.dataset.platform;
+      const contentTitle = contentArea.querySelector('h2').textContent;
+      const pageUrl = window.location.href;
+      let shareUrl = '';
+
+      switch (platform) {
+        case 'twitter':
+          shareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(pageUrl)}&text=${encodeURIComponent(contentTitle)}`;
+          break;
+        case 'facebook':
+          shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(pageUrl)}`;
+          break;
+        case 'whatsapp':
+          shareUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(contentTitle + ' ' + pageUrl)}`;
+          break;
+      }
+
+      if (shareUrl) {
+        window.open(shareUrl, '_blank', 'width=600,height=400');
+      }
+    }
+  });
+
   // --- Initialization ---
-  const [content, comments] = await Promise.all([fetchContent(), fetchComments()]);
-  if (content) renderContent(content);
-  if (comments) renderCommentTree(comments);
+  let loadedContent;
+  const init = async () => {
+    const [content, comments] = await Promise.all([fetchContent(), fetchComments()]);
+    if (content) {
+      loadedContent = content;
+      renderContent(content);
+    }
+    if (comments) renderCommentTree(comments);
+  };
+
+  init();
 });
