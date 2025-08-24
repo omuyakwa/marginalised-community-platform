@@ -1,0 +1,122 @@
+:root {
+  --primary-blue: #4189DD;
+  --accent-red: #BB1E10;
+  --accent-green: #006400;
+  --neutral-white: #FFFFFF;
+  --neutral-light-gray: #F5F7FA;
+  --neutral-gray: #E5E7EB;
+  --neutral-dark-gray: #4B5563;
+  --neutral-black: #000000;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  margin: 0;
+  background-color: var(--neutral-light-gray);
+  color: var(--neutral-dark-gray);
+  line-height: 1.6;
+}
+
+header {
+  background-color: var(--primary-blue);
+  color: var(--neutral-white);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header h1 {
+  margin: 0;
+}
+
+header a {
+  color: var(--neutral-white);
+  text-decoration: none;
+  margin-left: 1rem;
+}
+
+main {
+  padding: 2rem;
+}
+
+footer {
+  text-align: center;
+  padding: 1rem;
+  margin-top: 2rem;
+  background-color: var(--neutral-gray);
+}
+
+.auth-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+}
+
+.auth-container {
+  background: var(--neutral-white);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  width: 100%;
+  max-width: 400px;
+}
+
+.auth-container h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: var(--neutral-black);
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--neutral-gray);
+  border-radius: 8px;
+  box-sizing: border-box; /* Important */
+}
+
+.btn-primary {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: var(--primary-blue);
+  color: var(--neutral-white);
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-primary:hover {
+  background-color: #357ac2;
+}
+
+#message-area {
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: center;
+}
+
+#message-area.success {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+#message-area.error {
+  background-color: #f8d7da;
+  color: #721c24;
+}

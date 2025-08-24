@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n-key="login_title">Login - Gole Kaab</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <header>
+    <h1><a href="/" data-i18n-key="app_title">Gole Kaab</a></h1>
+  </header>
+  <main class="auth-page">
+    <div class="auth-container">
+      <h2 data-i18n-key="login_title">Login to your Account</h2>
+      <form id="login-form">
+        <div id="message-area"></div>
+        <div class="form-group">
+          <label for="email" data-i18n-key="login_email_label">Email Address</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+          <label for="password" data-i18n-key="login_password_label">Password</label>
+          <input type="password" id="password" name="password" required>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn-primary" data-i18n-key="login_button">Login</button>
+        </div>
+      </form>
+      <p data-i18n-key="login_register_link">Don't have an account? <a href="/register.html">Register</a></p>
+    </div>
+  </main>
+  <script src="/js/i18n.js"></script>
+  <script src="/js/auth.js"></script>
+</body>
+</html>

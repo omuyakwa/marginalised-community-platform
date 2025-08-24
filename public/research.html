@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n-key="research_workspace_title">Research Workspace - Gole Kaab</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    .workspace-container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .research-form {
+      background: #fff;
+      padding: 1.5rem;
+      border-radius: 12px;
+      margin-bottom: 2rem;
+    }
+    .item-list {
+      list-style: none;
+      padding: 0;
+    }
+    .item-list li {
+      background: #fff;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .item-list .item-title {
+      font-weight: bold;
+    }
+    .item-list .item-type {
+      font-size: 0.8rem;
+      padding: 0.2rem 0.5rem;
+      background: var(--neutral-gray);
+      border-radius: 4px;
+      margin-right: 1rem;
+    }
+    .delete-btn {
+      background: var(--accent-red);
+      color: white;
+      border: none;
+      padding: 0.5rem 0.8rem;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1><a href="/" data-i18n-key="app_title">Gole Kaab</a></h1>
+    <nav>
+      <a href="/dashboard.html" data-i18n-key="nav_dashboard">Dashboard</a>
+      <a href="/uploads.html" data-i18n-key="nav_upload">Upload</a>
+      <a href="#" id="logout-btn" data-i18n-key="nav_logout">Logout</a>
+    </nav>
+  </header>
+  <main class="workspace-container">
+    <h2 data-i18n-key="research_workspace_title">Research Workspace</h2>
+    <div id="message-area"></div>
+
+    <div class="research-form">
+      <h3 data-i18n-key="research_add_item">Add New Item</h3>
+      <form id="research-form">
+        <div class="form-group">
+          <label for="item-type" data-i18n-key="research_item_type">Type</label>
+          <select id="item-type" name="type">
+            <option value="note" selected data-i18n-key="research_item_type_note">Note</option>
+            <option value="link" data-i18n-key="research_item_type_link">Link</option>
+            <!-- File type would require integration with uploads -->
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="item-title" data-i18n-key="research_item_title">Title</label>
+          <input type="text" id="item-title" name="title" required>
+        </div>
+        <div class="form-group" id="url-group" style="display: none;">
+          <label for="item-url" data-i18n-key="research_item_url">URL</label>
+          <input type="url" id="item-url" name="url">
+        </div>
+        <div class="form-group" id="excerpt-group">
+          <label for="item-excerpt" data-i18n-key="research_item_excerpt">Excerpt / Note</label>
+          <textarea id="item-excerpt" name="excerpt" rows="3"></textarea>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn-primary" data-i18n-key="research_save_button">Save Item</button>
+        </div>
+      </form>
+    </div>
+
+    <h3 data-i18n-key="research_my_items">My Saved Items</h3>
+    <ul id="item-list" class="item-list">
+      <!-- Items will be rendered here by JavaScript -->
+    </ul>
+  </main>
+  <script src="/js/i18n.js"></script>
+  <script src="/js/research.js"></script>
+</body>
+</html>
