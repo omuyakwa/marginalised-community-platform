@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Explore Content - Gole Kaab</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    .explore-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .content-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+    .content-card {
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      transition: transform 0.2s;
+      display: flex;
+      flex-direction: column;
+    }
+    .content-card:hover {
+      transform: translateY(-5px);
+    }
+    .card-body {
+      padding: 1.5rem;
+      flex-grow: 1;
+    }
+    .card-body h3 {
+      margin-top: 0;
+    }
+    .card-footer {
+      padding: 1rem 1.5rem;
+      background: var(--neutral-light-gray);
+      font-size: 0.9rem;
+    }
+    .card-link {
+      text-decoration: none;
+      color: inherit;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1><a href="/">Gole Kaab</a></h1>
+    <nav>
+      <a href="/about.html">About</a>
+      <a href="/login.html">Login</a>
+    </nav>
+  </header>
+  <main class="explore-container">
+    <h2>Explore Public Content</h2>
+    <div id="content-grid" class="content-grid">
+      <!-- Content cards will be rendered here -->
+    </div>
+  </main>
+  <script src="/js/i18n.js"></script>
+  <script src="/js/explore.js"></script>
+</body>
+</html>

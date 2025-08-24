@@ -49,5 +49,11 @@
   "research_item_url": "URL",
   "research_item_excerpt": "Excerpt / Note",
   "research_save_button": "Save Item",
-  "research_my_items": "My Saved Items"
+  "research_my_items": "My Saved Items",
+
+  "about_title": "About - Gole Kaab",
+  "about_page_title": "About Gole Kaab",
+  "about_p1": "Gole Kaab is a secure, multilingual digital platform designed to empower and connect marginalized communities, with a focus on youth, women, and persons with disabilities.",
+  "about_p2": "Our mission is to provide a safe space for sharing knowledge, accessing resources, and fostering dialogue. By supporting bulky document uploads, AI-assisted research, and community discussions, we aim to bridge the information gap and amplify the voices of those who are often unheard.",
+  "about_p3": "This platform is built with accessibility and security at its core, ensuring a user-friendly experience on both mobile and desktop devices, even in low-bandwidth environments."
 }

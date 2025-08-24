@@ -49,5 +49,11 @@
   "research_item_url": "URL",
   "research_item_excerpt": "Soo saaris / Qoraal",
   "research_save_button": "Keydi Shayga",
-  "research_my_items": "Shayga aan Keydiyay"
+  "research_my_items": "Shayga aan Keydiyay",
+
+  "about_title": "Ku saabsan - Gole Kaab",
+  "about_page_title": "Ku saabsan Gole Kaab",
+  "about_p1": "Gole Kaab waa madal dijitaal ah oo ammaan ah, luuqado badanna ku baxda, looguna talagalay in lagu xoojiyo laguna xiro bulshooyinka la haybsooco, iyadoo diiradda la saarayo dhalinyarada, haweenka, iyo dadka naafada ah.",
+  "about_p2": "Hadafkeenu waa inaan bixinno goob ammaan ah oo lagu wadaago aqoonta, lagu helo kheyraadka, laguna kobciyo wada-hadalka. Anagoo taageerayna soo gelinta dukumiintiyada waaweyn, cilmi-baarista AI-ku caawiyo, iyo doodaha bulshada, waxaan hiigsaneynaa inaan buuxinno farqiga macluumaadka iyo inaan kor u qaadno codadka kuwa inta badan aan la maqal.",
+  "about_p3": "Madalkan waxaa lagu dhisay helitaan fudud iyo ammaan udub-dhexaad u ah, iyadoo la hubinayo khibrad adeegsi oo sahlan oo ku saabsan aaladaha mobilada iyo kombuyuutarrada, xitaa deegaannada internet-koodu hooseeyo."
 }

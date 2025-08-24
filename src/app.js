@@ -47,6 +47,12 @@ app.use('/api/summaries', require('./api/summaries'));
 // Research routes
 app.use('/api/research', require('./api/research'));
 
+// Comments routes
+app.use('/api/comments', require('./api/comments'));
+
+// Users routes
+app.use('/api/users', require('./api/users'));
+
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

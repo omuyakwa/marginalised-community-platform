@@ -53,6 +53,66 @@ async function createContent(req, res) {
   }
 }
 
+/**
+ * Get a single content item by its ID.
+ */
+async function getContentById(req, res) {
+  try {
+    const { id } = req.params;
+    const content = await Content.findById(id).populate('authorId', 'name');
+
+    if (!content) {
+      return res.status(404).json({ message: 'Content not found.' });
+    }
+
+    // Later, add logic to check for visibility permissions
+    res.status(200).json(content);
+
+  } catch (err) {
+    console.error('Get Content By ID Error:', err);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+}
+
+
+/**
+ * Get all public content.
+ */
+async function getPublicContent(req, res) {
+  try {
+    const content = await Content.find({ visibility: 'public' })
+      .populate('authorId', 'name')
+      .sort({ createdAt: -1 });
+
+    res.status(200).json(content);
+
+  } catch (err) {
+    console.error('Get Public Content Error:', err);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+}
+
+
+/**
+ * Get all content for the currently logged-in user.
+ */
+async function getMyContent(req, res) {
+  try {
+    const content = await Content.find({ authorId: req.user._id })
+      .sort({ createdAt: -1 });
+
+    res.status(200).json(content);
+
+  } catch (err) {
+    console.error('Get My Content Error:', err);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+}
+
+
 module.exports = {
   createContent,
+  getContentById,
+  getPublicContent,
+  getMyContent,
 };

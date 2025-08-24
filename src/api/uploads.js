@@ -26,6 +26,41 @@ router.post('/', upload.single('file'), (req, res) => {
   });
 });
 
+// @route   GET /api/uploads/:id
+// @desc    Download or display a file from GridFS
+// @access  Public (for now, should be permissioned later)
+router.get('/:id', async (req, res) => {
+  try {
+    const { GridFSBucket, ObjectID } = require('mongodb');
+    const db = require('mongoose').connection.db;
+    const bucket = new GridFSBucket(db, { bucketName: 'uploads' });
+
+    const fileId = new ObjectID(req.params.id);
+
+    // Find the file document
+    const file = await db.collection('uploads.files').findOne({ _id: fileId });
+    if (!file) {
+      return res.status(404).json({ message: 'File not found.' });
+    }
+
+    // Set headers
+    res.set('Content-Type', file.contentType);
+    res.set('Content-Disposition', `inline; filename="${file.filename}"`); // inline to display in browser
+
+    const downloadStream = bucket.openDownloadStream(fileId);
+    downloadStream.pipe(res);
+
+  } catch (error) {
+    // Catch invalid ObjectID errors
+    if (error.name === 'BSONTypeError') {
+      return res.status(400).json({ message: 'Invalid file ID.' });
+    }
+    console.error('File download error:', error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+});
+
+
 // Middleware for handling multer errors
 router.use((error, req, res, next) => {
   if (error instanceof require('multer').MulterError) {

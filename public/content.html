@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Content - Gole Kaab</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    .content-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .content-body {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 12px;
+      margin-bottom: 2rem;
+    }
+    .content-meta {
+      font-size: 0.9rem;
+      color: var(--neutral-dark-gray);
+      margin-bottom: 1rem;
+    }
+    .comments-section {
+      margin-top: 2rem;
+    }
+    .comment-thread {
+      list-style: none;
+      padding: 0;
+    }
+    .comment {
+      background: #fff;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      border-left: 3px solid var(--neutral-gray);
+    }
+    .comment-author {
+      font-weight: bold;
+    }
+    .comment-text {
+      margin: 0.5rem 0;
+    }
+    .comment-actions button {
+      background: none;
+      border: 1px solid var(--neutral-gray);
+      border-radius: 4px;
+      cursor: pointer;
+      margin-right: 0.5rem;
+    }
+    .comment-replies {
+      padding-left: 2rem;
+      margin-top: 1rem;
+      border-left: 1px dashed var(--neutral-gray);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1><a href="/">Gole Kaab</a></h1>
+    <nav>
+      <a href="/dashboard.html">Dashboard</a>
+      <a href="#" id="logout-btn">Logout</a>
+    </nav>
+  </header>
+  <main class="content-container">
+    <div id="content-area">
+      <!-- Content will be rendered here by JavaScript -->
+    </div>
+
+    <hr>
+
+    <div class="comments-section">
+      <h3>Comments</h3>
+      <div id="message-area"></div>
+
+      <form id="comment-form" style="margin-bottom: 2rem;">
+        <div class="form-group">
+          <label for="comment-text">Leave a comment</label>
+          <textarea id="comment-text" rows="3" required></textarea>
+        </div>
+        <button type="submit" class="btn-primary">Submit Comment</button>
+      </form>
+
+      <ul id="comment-thread" class="comment-thread">
+        <!-- Comments will be rendered here -->
+      </ul>
+    </div>
+  </main>
+  <script src="/js/i18n.js"></script>
+  <script src="/js/content.js"></script>
+</body>
+</html>
