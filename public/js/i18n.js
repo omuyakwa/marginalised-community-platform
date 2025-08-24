@@ -62,6 +62,90 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  createLanguageSwitcher();
+  // --- High Contrast Mode ---
+  const highContrastToggle = document.createElement('button');
+  highContrastToggle.id = 'high-contrast-toggle';
+  highContrastToggle.textContent = 'HC'; // Simple text for now
+  highContrastToggle.style.marginLeft = '1rem';
+  highContrastToggle.title = 'Toggle High Contrast';
+
+  const applyHighContrast = (isHc) => {
+    if (isHc) {
+      document.body.classList.add('high-contrast');
+      localStorage.setItem('golekaab-hc', 'true');
+    } else {
+      document.body.classList.remove('high-contrast');
+      localStorage.setItem('golekaab-hc', 'false');
+    }
+  };
+
+  highContrastToggle.addEventListener('click', () => {
+    const isHighContrast = document.body.classList.contains('high-contrast');
+    applyHighContrast(!isHighContrast);
+  });
+
+  // --- Font Size Controls ---
+  const FONT_STEP = 1; // 1px
+  const MIN_FONT_SIZE = 12;
+  const MAX_FONT_SIZE = 24;
+
+  const createFontSizeControls = () => {
+    const decreaseBtn = document.createElement('button');
+    decreaseBtn.textContent = 'A-';
+    decreaseBtn.title = 'Decrease font size';
+    decreaseBtn.addEventListener('click', () => changeFontSize(-FONT_STEP));
+
+    const increaseBtn = document.createElement('button');
+    increaseBtn.textContent = 'A+';
+    increaseBtn.title = 'Increase font size';
+    increaseBtn.addEventListener('click', () => changeFontSize(FONT_STEP));
+
+    return [decreaseBtn, increaseBtn];
+  };
+
+  const changeFontSize = (step) => {
+    const currentSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
+    let newSize = currentSize + step;
+    if (newSize < MIN_FONT_SIZE) newSize = MIN_FONT_SIZE;
+    if (newSize > MAX_FONT_SIZE) newSize = MAX_FONT_SIZE;
+
+    document.documentElement.style.fontSize = `${newSize}px`;
+    localStorage.setItem('golekaab-fontsize', newSize);
+  };
+
+  const applySavedFontSize = () => {
+    const savedSize = localStorage.getItem('golekaab-fontsize');
+    if (savedSize) {
+      document.documentElement.style.fontSize = `${savedSize}px`;
+    }
+  };
+
+  // --- Accessibility Controls Container ---
+  const createAccessibilityControls = () => {
+    const nav = document.querySelector('header nav');
+    if (nav) {
+      const [decreaseBtn, increaseBtn] = createFontSizeControls();
+      nav.appendChild(decreaseBtn);
+      nav.appendChild(increaseBtn);
+
+      // Language switcher
+      const langSwitcher = document.createElement('select');
+      langSwitcher.id = 'language-switcher';
+      langSwitcher.innerHTML = `<option value="en">English</option><option value="so">Soomaali</option>`;
+      langSwitcher.value = getLanguagePreference();
+      langSwitcher.addEventListener('change', (e) => setLanguage(e.target.value));
+
+      nav.appendChild(langSwitcher);
+      nav.appendChild(highContrastToggle);
+    }
+  };
+
+  // --- Initial Load ---
+  applySavedFontSize();
+  createAccessibilityControls();
   setLanguage(getLanguagePreference());
+
+  const savedHc = localStorage.getItem('golekaab-hc') === 'true';
+  applyHighContrast(savedHc);
+
 });

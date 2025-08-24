@@ -5,37 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title data-i18n-key="dashboard_title">Admin Dashboard - Gole Kaab</title>
   <link rel="stylesheet" href="/css/style.css">
-  <style>
-    .dashboard-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-    }
-    .card {
-      background: #fff;
-      padding: 1.5rem;
-      border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    }
-    .card h3 {
-      margin-top: 0;
-      border-bottom: 1px solid var(--neutral-gray);
-      padding-bottom: 0.5rem;
-      margin-bottom: 1rem;
-    }
-    .kpi {
-      font-size: 2.5rem;
-      font-weight: bold;
-      color: var(--primary-blue);
-      text-align: center;
-    }
-    .kpi-label {
-      text-align: center;
-      color: var(--neutral-dark-gray);
-    }
-  </style>
 </head>
 <body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
   <header>
     <h1><a href="/" data-i18n-key="app_title">Gole Kaab</a></h1>
     <nav>
@@ -43,7 +15,7 @@
         <a href="#" id="logout-btn" data-i18n-key="nav_logout">Logout</a>
     </nav>
   </header>
-  <main>
+  <main id="main-content">
     <h2 data-i18n-key="dashboard_title">Admin Dashboard</h2>
     <div id="message-area"></div>
 

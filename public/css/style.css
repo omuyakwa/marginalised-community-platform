@@ -9,12 +9,73 @@
   --neutral-black: #000000;
 }
 
+html {
+  font-size: 16px; /* Base font size */
+}
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   margin: 0;
   background-color: var(--neutral-light-gray);
   color: var(--neutral-dark-gray);
   line-height: 1.6;
+  font-size: 1rem;
+}
+
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--primary-blue);
+  color: white;
+  padding: 8px;
+  z-index: 100;
+  transition: top 0.3s;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* --- High Contrast Mode --- */
+body.high-contrast {
+  background-color: #000000;
+  color: #FFFFFF;
+}
+
+body.high-contrast header {
+  background-color: #000000;
+  border-bottom: 2px solid #FFFF00;
+}
+
+body.high-contrast header a {
+  color: #FFFF00;
+}
+
+body.high-contrast .auth-container,
+body.high-contrast .card,
+body.high-contrast .research-form,
+body.high-contrast .item-list li,
+body.high-contrast .content-body,
+body.high-contrast .comment,
+body.high-contrast .about-container {
+  background-color: #1a1a1a;
+  color: #FFFFFF;
+  border: 1px solid #FFFF00;
+}
+
+body.high-contrast .btn-primary {
+  background-color: #FFFF00;
+  color: #000000;
+  font-weight: bold;
+}
+
+body.high-contrast a {
+  color: #00FFFF;
+}
+
+body.high-contrast h1, body.high-contrast h2, body.high-contrast h3 {
+  color: #FFFF00;
 }
 
 header {
@@ -28,6 +89,15 @@ header {
 
 header h1 {
   margin: 0;
+  font-size: 1.5rem;
+}
+
+main h2 {
+  font-size: 1.75rem;
+}
+
+main h3 {
+  font-size: 1.25rem;
 }
 
 header a {
@@ -77,6 +147,43 @@ footer {
   display: block;
   margin-bottom: 0.5rem;
   font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  font-size: 1rem;
+}
+
+/* --- Dashboard & Card Styles --- */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+.card {
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.card h3 {
+  margin-top: 0;
+  border-bottom: 1px solid var(--neutral-gray);
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+.kpi {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: var(--primary-blue);
+  text-align: center;
+}
+.kpi-label {
+  text-align: center;
+  color: var(--neutral-dark-gray);
+  font-size: 0.9rem;
 }
 
 .form-group input,
