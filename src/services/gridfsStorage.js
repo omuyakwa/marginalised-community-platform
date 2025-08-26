@@ -4,27 +4,27 @@ const path = require('path');
 const mongoose = require('mongoose');
 
 class GridFsStorage {
-  constructor(opts) {
-    this.url = opts.url;
-    this.db = opts.db;
-    this.file = opts.file;
+  constructor(opts = {}) {
+    this.file = opts.file || null;
 
-    if (!this.url && !this.db) {
-      throw new Error('Either a url or a db connection must be provided.');
+    // Use mongoose connection directly (recommended in serverless environments like Vercel)
+    if (!mongoose.connection || mongoose.connection.readyState === 0) {
+      throw new Error('Mongoose is not connected. Please connect before using GridFsStorage.');
     }
+
+    this.db = mongoose.connection.db;
   }
 
-  _getDb() {
+  async _getDb() {
+    if (this.db) return this.db;
+
     return new Promise((resolve, reject) => {
-      if (this.db) {
-        return resolve(this.db);
-      }
-      // If a URL is provided, we need to get the db object from mongoose
-      // This assumes mongoose is already connected.
       const conn = mongoose.connection;
+
       if (conn.readyState === 1) {
         return resolve(conn.db);
       }
+
       conn.once('open', () => resolve(conn.db));
       conn.once('error', (err) => reject(err));
     });
@@ -34,20 +34,21 @@ class GridFsStorage {
     try {
       const db = await this._getDb();
       const bucket = new GridFSBucket(db, {
-        bucketName: 'uploads'
+        bucketName: 'uploads',
       });
 
       const filename = await this._getFilename(req, file);
 
       const uploadStream = bucket.openUploadStream(filename, {
-        metadata: { originalname: file.originalname, mimetype: file.mimetype }
+        metadata: {
+          originalname: file.originalname,
+          mimetype: file.mimetype,
+        },
       });
 
       file.stream.pipe(uploadStream);
 
-      uploadStream.on('error', err => {
-        cb(err);
-      });
+      uploadStream.on('error', (err) => cb(err));
 
       uploadStream.on('finish', () => {
         cb(null, {
@@ -55,26 +56,23 @@ class GridFsStorage {
           filename: uploadStream.filename,
           size: uploadStream.length,
           mimetype: file.mimetype,
-          path: uploadStream.filename, // For multer compatibility
+          path: uploadStream.filename, // for multer compatibility
         });
       });
-
     } catch (err) {
       cb(err);
     }
-  }
+  };
 
   _getFilename(req, file) {
-    // Allow user to provide a custom filename function
     if (this.file) {
       return Promise.resolve(this.file(req, file));
     }
-    // Default: generate a random name
+
     return new Promise((resolve, reject) => {
       crypto.randomBytes(16, (err, buf) => {
-        if (err) {
-          return reject(err);
-        }
+        if (err) return reject(err);
+
         const filename = buf.toString('hex') + path.extname(file.originalname);
         resolve(filename);
       });
@@ -82,19 +80,18 @@ class GridFsStorage {
   }
 
   _removeFile = async (req, file, cb) => {
-     try {
+    try {
       const db = await this._getDb();
       const bucket = new GridFSBucket(db, {
-        bucketName: 'uploads'
+        bucketName: 'uploads',
       });
 
-      // file.id is the _id of the file in the fs.files collection
-      await bucket.delete(file.id);
+      await bucket.delete(file.id); // file.id comes from finish() above
       cb(null);
     } catch (err) {
       cb(err);
     }
-  }
+  };
 }
 
 module.exports = (opts) => new GridFsStorage(opts);
